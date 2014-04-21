@@ -5,6 +5,8 @@ var express = require('express'),
     Schema = mongoose.Schema;
 
 // Init
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/public')
 mongoose.connect('mongodb://localhost/urlshort')
 
 var urlSchema = new Schema({
@@ -20,7 +22,7 @@ app.use(logger('dev'));
 
 
 app.get('/', function(req,res) {
-
+  res.render('index');
 });
 
 
