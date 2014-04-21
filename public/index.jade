@@ -2,8 +2,6 @@ extends layout
 
 block content
   .row
-    h2.small-12.columns.text-center Short your URL!
-  .row
     form(method='post', action='/')
       div.small-8.small-centered.columns
         .row.collapse
@@ -15,4 +13,4 @@ block content
             div.small-12.columns
               input.button.small.expand(type='submit', value='Short it')
   .row
-    div.small-12.columns.text-center: a(href='#') List all shortened URLs
+    div.small-12.columns.text-center: a(href='/list') List all shortened URLs

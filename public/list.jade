@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  .row.panel
+    .div.small-12.columns.text-center
+      ul.url-list
+        each url in urls
+          li: a(href='#{url.urlID}')= url.realURL
