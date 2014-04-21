@@ -1,16 +1,18 @@
-doctype html
-html
-  head
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    title URL SHORT!
-    link(rel='stylesheet', href='css/normalize.css')
-    link(rel='stylesheet', href='css/foundation.min.css')
-    link(rel='stylesheet', href='css/app.css')
-    script(src='js/modernizr.js')
-  body
-    .row
-      h2.large-12.columns Short your URL!
-    script(src='js/jquery.min.js')
-    script(src='js/foundation.min.js')
-    script(src='js/url_short.js')
+extends layout
+
+block content
+  .row
+    h2.small-12.columns.text-center Short your URL!
+  .row
+    form(method='post', action='/')
+      div.small-8.small-centered.columns
+        .row.collapse
+          div.small-3.columns
+            span.prefix http://
+          div.small-9.columns
+            input#url-input(type='text', name='url' placeholder='www.domain.com')
+          .row.collapse
+            div.small-12.columns
+              input.button.small.expand(type='submit', value='Short it')
+  .row
+    div.small-12.columns.text-center: a(href='#') List all shortened URLs
