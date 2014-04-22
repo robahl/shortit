@@ -6,11 +6,17 @@ block content
       div.small-8.small-centered.columns
         .row.collapse
           div.small-3.columns
-            span.prefix http://
+            span#protocolToggle.prefix http://
           div.small-9.columns
+            input(type='hidden', id='protocolField' name='protocol' value='http://')
             input#url-input(type='text', name='url' placeholder='www.domain.com')
+
           .row.collapse
             div.small-12.columns
               input.button.small.expand(type='submit', value='Short it')
+          if error
+            div.small-12.columns.alert-box.warning.expand.text-center.
+              Invalid URL... Try again
+
   .row
     div.small-12.columns.text-center: a(href='/list') List all shortened URLs

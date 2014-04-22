@@ -26,9 +26,16 @@ app.get('/', function(req,res) {
 
 // POST '/'
 app.post('/', function(req,res) {
+  if (!req.body.protocol.match(/https?:\/\//)) {
+    res.render('index', {error: "Invalid URL!!!"});
+
+    return;
+  }
+  var fullURL = req.body.protocol + req.body.url;
+  console.log("FULL URL = ", fullURL);
   var url = new UrlShort({
     urlID: makeShortStr(3),
-    realURL: req.body.url,
+    realURL: fullURL,
     clicks: 0});
 
   url.save(function(err) {if (err) throw err})
@@ -41,6 +48,21 @@ app.get('/list', function(req,res) {
   UrlShort.find(function(err,docs) {
     res.render('list', {urls: docs});
   });
+});
+
+// GET '/:urlID'
+app.get('/:urlID', function(req,res) {
+  // do lite check if its an url id.
+  if (req.params.urlID.length == 3) {
+    UrlShort.findOne({urlID: req.params.urlID}, function(err,doc) {
+      if (err) throw err;
+      res.redirect(doc.realURL);
+      doc.clicks++;
+      doc.save(function(err) {if (err) throw err})
+    });
+  } else {
+    res.render('not_found');
+  }
 });
 
 

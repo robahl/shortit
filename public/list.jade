@@ -5,4 +5,4 @@ block content
     .div.small-12.columns.text-center
       ul.url-list
         each url in urls
-          li: a(href='#{url.urlID}')= url.realURL
+          li: a(href='#{url.urlID}') #{url.realURL} - #{url.clicks}
