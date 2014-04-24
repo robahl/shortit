@@ -8,7 +8,9 @@ Schema = mongoose.Schema;
 // Init
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/public')
-mongoose.connect('mongodb://localhost/urlshort')
+mongoose.connect('mongodb://localhost/urlshort', function(err) {
+  if (err) console.error("Error: could not connect to database");
+});
 
 var UrlShort = mongoose.model('UrlShort', {
   urlID: String, realURL: String, clicks: Number
