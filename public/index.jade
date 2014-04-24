@@ -14,9 +14,9 @@ block content
           .row.collapse
             div.small-12.columns
               input.button.small.expand(type='submit', value='Short it')
-          if error
-            div.small-12.columns.alert-box.warning.expand.text-center.
-              Invalid URL... Try again
+          if msg
+            div.small-12.columns.alert-box.expand.text-center(class=success?'success':'warning').
+              #{msg}
 
   .row
     div.small-12.columns.text-center: a(href='/list') List all shortened URLs

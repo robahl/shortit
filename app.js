@@ -30,7 +30,7 @@ app.get('/', function(req,res) {
 app.post('/', function(req,res) {
   var fullURL = req.body.protocol + req.body.url;
   if (!fullURL.match(/^(https?|ftp):\/\/[^\s\/$.?#].[^\s]*$/i)) {
-    res.render('index', {error: "Invalid URL!!!"});
+    res.render('index', {msg: "Type a correct URL!", success: false});
 
     return;
   }
@@ -43,7 +43,7 @@ app.post('/', function(req,res) {
 
   url.save(function(err) {if (err) throw err})
 
-  res.redirect('/');
+  res.render('index', {msg: "Success! Your shortie is /" + url.urlID, success: true});
 });
 
 // GET '/list'
