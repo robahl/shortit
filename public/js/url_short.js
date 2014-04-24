@@ -14,3 +14,5 @@ $protocolToggle.click(function() {
     $protocolToggle.text('http://');
   }
 });
+
+$('#url-input').focus();
