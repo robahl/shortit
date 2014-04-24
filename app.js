@@ -28,12 +28,13 @@ app.get('/', function(req,res) {
 
 // POST '/'
 app.post('/', function(req,res) {
-  if (!req.body.protocol.match(/https?:\/\//)) {
+  var fullURL = req.body.protocol + req.body.url;
+  if (!fullURL.match(/^(https?|ftp):\/\/[^\s\/$.?#].[^\s]*$/i)) {
     res.render('index', {error: "Invalid URL!!!"});
 
     return;
   }
-  var fullURL = req.body.protocol + req.body.url;
+
   console.log("FULL URL = ", fullURL);
   var url = new UrlShort({
     urlID: makeShortStr(3),
