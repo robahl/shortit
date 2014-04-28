@@ -17,7 +17,10 @@ var UrlShort = mongoose.model('UrlShort', {
 });
 
 // Middleware and routes
-app.use(logger('dev'));
+if (process.env.NODE_ENV == 'production')
+  app.use(logger('short'));
+else
+  app.use(logger('dev'));
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 
