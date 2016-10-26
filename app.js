@@ -7,7 +7,8 @@ Schema = mongoose.Schema;
 
 // Init
 app.set('view engine', 'jade');
-app.set('views', __dirname + '/public')
+app.set('views', __dirname + '/public');
+app.set('trust proxy', true);
 mongoose.connect('mongodb://localhost/urlshort', function(err) {
   if (err) console.error("Error: could not connect to database");
 });
@@ -62,6 +63,8 @@ app.get('/:urlID', function(req,res) {
   if (req.params.urlID.length == 3) {
     UrlShort.findOne({urlID: req.params.urlID}, function(err,doc) {
       if (err) throw err;
+      if (!doc)
+        return res.render('not_found');
       res.redirect(doc.realURL);
       doc.clicks++;
       doc.save(function(err) {if (err) throw err})
